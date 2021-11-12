@@ -1,7 +1,10 @@
-from prepare_training_data import prepare_training_data
+# from prepare_training_data import prepare_training_data
+# import cv2
+# import numpy as np
+# from predict import predict
 import cv2
 import numpy as np
-from predict import predict
+from Videocapture import *
 
 if __name__ == '__main__':
     print("Preparing data...")
@@ -19,31 +22,42 @@ if __name__ == '__main__':
     print("Predicting images...")
 
     screen = cv2.VideoCapture(0)
+
     while 1:
         success, img = screen.read()
         #gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        if success == 0:
+            continue
         predict_img = predict(img, face_recognizer)
         cv2.imshow("now_img", predict_img)
-        k = cv2.waitKey(0)
+        k = cv2.waitKey(1)
         if k == 27:
             # 通过esc键退出摄像
             cv2.destroyAllWindows()
             break
-        elif k == ord("s"):
-            # 通过s键保存图片，并退出。
-            cv2.imwrite("image2.jpg", img)
-            cv2.destroyAllWindows()
-            break
-        cv2.waitKey(0)
-        break
     screen.release()
     cv2.waitKey(0)
     cv2.destroyAllWindows()
     # 加载预测图像，这里我图简单，就直接把路径写上去了
-    # test_img1 = cv2.imread(r"./img_predict/happy1.jpg",0)
+    test_img1 = cv2.imread(r"./img_predict/happy1.jpg",0)
+    sc = cv2.VideoCapture(0)
+    tu, te = sc.read()
     # test_img2 = cv2.imread(r"./img_predict/sad1.jpg",0)
     # test_img3 = cv2.imread(r"./img_predict/surprise1.jpg", 0)
     # test_img4 = cv2.imread(r"./img_predict/surprise2.jpg", 0)
+
+
+    # print(te)
+    # print(test_img1)
+    # gray1 = cv2.cvtColor(te, cv2.COLOR_BGR2GRAY)
+    # gray2 = cv2.cvtColor(test_img1, cv2.COLOR_BAYER_BG2BGR)
+    # gray2 = cv2.cvtColor(gray2, cv2.COLOR_BGR2GRAY)
+    # print(gray1)
+    # print(gray2)
+    # cv2.imshow('gray1', gray1)
+    # cv2.imshow('gray2', gray2)
+    # cv2.waitKey(0)
+
 
     # 进行预测
     # predicted_img1 = predict(test_img1, face_recognizer)
