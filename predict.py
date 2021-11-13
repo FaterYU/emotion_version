@@ -13,7 +13,8 @@ def predict(test_img, face_recognizer):
 
     # 从图像中检测脸部
     face, rect = detect_face(img)
-
+    if face is None:
+        return img
     # 使用我们的脸部识别器预测图像
     label = face_recognizer.predict(face)
     # 获取由人脸识别器返回的相应标签的名称
@@ -26,3 +27,4 @@ def predict(test_img, face_recognizer):
     draw_text(img, label_text, rect[0], rect[1] - 5)
 
     return img
+

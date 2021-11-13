@@ -3,8 +3,8 @@ import cv2
 
 def detect_face(img):
     #将图像转变成灰度图像，因为OpenCV人脸检测器需要灰度图像
-    gray = cv2.cvtColor(img, cv2.COLOR_BAYER_BG2GRAY)
-
+    # gray = cv2.cvtColor(img, cv2.COLOR_BAYER_BG2GRAY)
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     #加载OpenCV人脸识别器，注意这里的路径是前面下载识别器时，你保存的位置
     face_cascade = cv2.CascadeClassifier(r'lbpcascade_frontalface.xml')
 
@@ -21,3 +21,4 @@ def detect_face(img):
 
     #返回人脸及其所在区域
     return gray[y:y + w, x:x + h], faces[0]
+

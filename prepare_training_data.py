@@ -22,8 +22,8 @@ def prepare_training_data():
         image_path = './img_train/' + image_path
 
         #返回灰度图，返回Mat对象
-        image = cv2.imread(image_path,0)
-
+        image = cv2.imread(image_path, 0)
+        image = cv2.cvtColor(image, cv2.COLOR_BAYER_BG2BGR)
         #以窗口形式显示图像，显示100毫秒
         # cv2.imshow("Training on image...", image)
         # cv2.waitKey(50)
